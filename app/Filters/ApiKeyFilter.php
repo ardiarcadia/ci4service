@@ -29,7 +29,7 @@ class ApiKeyFilter implements FilterInterface
         $serverApiKey = "bzLzw84ImG5XpOzai";
         $clientApiKey = $request->getHeaderLine('X-API-KEY');
 
-        $libEncrypt = new CryptoLib();
+        $libEncrypt = new CryptoLib;
         $decryptedclientApiKey = $libEncrypt->decrypt($clientApiKey);
 
         if ($decryptedclientApiKey !== $serverApiKey) {

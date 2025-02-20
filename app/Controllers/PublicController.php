@@ -31,7 +31,7 @@ class PublicController extends BaseController
     public function generateKey()
     {
         $serverApiKey = "bzLzw84ImG5XpOzai";
-        $libEncrypt = new CryptoLib();
+        $libEncrypt = new CryptoLib;
         $encryptedclientApiKey = $libEncrypt->encrypt($serverApiKey);
 
         $data = [
