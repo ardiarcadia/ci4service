@@ -5,6 +5,7 @@ namespace App\Filters;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Libraries\CryptoLib;
 
 class ApiKeyFilter implements FilterInterface
 {
@@ -25,13 +26,16 @@ class ApiKeyFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        $validApiKey = "YOUR_SECRET_API_KEY";
-        $apiKey = $request->getHeaderLine('X-API-KEY');
+        $serverApiKey = "bzLzw84ImG5XpOzai";
+        $clientApiKey = $request->getHeaderLine('X-API-KEY');
 
-        if ($apiKey !== $validApiKey) {
+        $libEncrypt = new CryptoLib();
+        $decryptedclientApiKey = $libEncrypt->decrypt($clientApiKey);
+
+        if ($decryptedclientApiKey !== $serverApiKey) {
             return service('response')->setJSON([
-                'status' => 'error',
-                'message' => 'Invalid API Key'
+                'status' => false,
+                'message' => 'Invalid Client API Key'
             ])->setStatusCode(401);
         }
     }

@@ -75,6 +75,7 @@ class Filters extends BaseFilters
             // 'invalidchars',
             'cors',
             // 'apikey' => ['except' => 'api/*'],
+            // 'csrf' => ['except' => ['foo/*', 'bar/*']],
         ],
         'after' => [
             // 'honeypot',
